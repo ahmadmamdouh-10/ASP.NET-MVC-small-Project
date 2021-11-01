@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using ViewModels
+@model UserEditViewModel
+
+<style>
+    #container {
+        width: 700px;
+        margin: 0 auto;
+    }
+
+    #UserInfoLoader {
+        height: 50px;
+        width: 100px;
+        margin-bottom: 50px;
+    }
+</style>
+
+<h2>Create Page</h2>
+
+
+@*<div style="display:none; height:50px; width:100px;" id="UsersInfoLoader">
+    <img src="~/Content/chromecapture.gif" />
+</div>*@
+<script>
+    function fnSuccess() {
+        document.getElementById("newUserName").value = '';
+        document.getElementById("newPass").value = '';
+        document.getElementById("newMobile").value = '';
+        document.getElementById("newAddress").value = '';
+    }
+</script>
+
+
+@using (Ajax.BeginForm("Create", "User", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    LoadingElementId = "UsersInfoLoader",
+    LoadingElementDuration = 2,
+    OnSuccess = "fnSuccess"
+}))
+{
+    @Html.LabelFor(i => i.UserName)
+    @Html.TextBoxFor(i => i.UserName, new { @class = "form-control", @id = "newUserName" })
+    @Html.ValidationMessageFor(i => i.UserName)
+
+    @Html.LabelFor(i => i.Password)
+    @Html.TextBoxFor(i => i.Password, new { @class = "form-control", @id = "newPass" })
+    @Html.ValidationMessageFor(i => i.Password)
+
+    @Html.LabelFor(i => i.Mobile)
+    @Html.TextBoxFor(i => i.Mobile, new { @class = "form-control", @id = "newMobile" })
+    @Html.ValidationMessageFor(i => i.Mobile)
+
+    @Html.LabelFor(i => i.Address)
+    @Html.TextBoxFor(i => i.Address, new { @class = "form-control", @id = "newAddress" })
+    @Html.ValidationMessageFor(i => i.Address)
+
+    <br />
+    <br />
+    <input type="submit" value="Create" class="btn-lg btn-primary" />
+    <div style="display:none;" class="spinner-border text-primary" role="status" id="UsersInfoLoader">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
+

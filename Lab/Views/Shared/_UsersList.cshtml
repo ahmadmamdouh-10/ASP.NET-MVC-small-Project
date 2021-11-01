@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@model IEnumerable<UserViewModel>*@
+@using ViewModels
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<UserViewModel>
+
+
+
+
+<p>
+    @using (Html.BeginForm("Index", "User", FormMethod.Get))
+    {
+        <b> Search By: </b>
+        @Html.RadioButton("SearchBy", "Username", true) <text>Name</text>
+        @Html.RadioButton("SearchBy", "Mobile")<text>Mobile</text>
+        @Html.RadioButton("SearchBy", "Address") <text>Address</text>
+        <br />
+        @Html.TextBox("search") <input type="submit" value="search" />
+    }
+</p>
+
+<table border="1" style="width:100%; margin-top: 10px; " class="table table-dark table-hover">
+    <thead>
+        <tr style="background-color:aqua;">
+            <th>
+                ID
+            </th>
+            <th>
+                User Name
+            </th>
+            <td>
+                Mobile
+            </td>
+            <td>
+                Details
+            </td>
+            <td>
+                Edit
+            </td>
+            <td>
+                Delete
+            </td>
+        </tr>
+    </thead>
+    @foreach (UserViewModel UV in Model)
+    {
+        <tr>
+            <td>
+                @UV.ID
+            </td>
+            <td>
+                @UV.UserName
+            </td>
+            <td>
+                @UV.Mobile
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = UV.ID })
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = UV.ID })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", new { id = UV.ID },
+                new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ContainerOfusersList" })
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
+
+<br />
+<br />
+<div></div>
+Page (@(Model.PageCount <Model.PageNumber ?0: Model.PageNumber)/@Model.PageCount)
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
+

@@ -1,0 +1,71 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/bootstrap.rtl.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="@Url.Content("~/Content/Css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+    <style>
+        #container{
+            margin:4px;
+        }
+
+        .header {
+            text-align: center;
+            background-color: aliceblue
+        }
+
+        .footer {
+            text-align: center;
+            background-color: aliceblue
+        }
+
+        .nav-item {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header class="header">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       href="http://localhost:62786/User/Index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" 
+                       href="http://localhost:62786/User/Index2">Filter</a>
+                </li>
+            </ul>
+        </header>
+        @RenderBody()
+        <br />
+        <br />
+
+        <footer class="footer">
+            <h3>
+                @RenderSection("UserInfo", false)
+            </h3>
+
+            <p class="mbr-text mbr-fonts-style display-7 cpright">
+                © Copyright 2019 Footer Template - All Rights Reserved
+            </p>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using ViewModels
+@model UserEditViewModel
+
+
+<h2> Edit User Page</h2>
+
+
+@using (Html.BeginForm("Edit", "User", "POST"))
+{
+    @Html.LabelFor(i => i.UserName)
+    @Html.TextBoxFor(i => i.UserName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(i => i.UserName)
+
+    @Html.LabelFor(i => i.Password)
+    @Html.TextBoxFor(i => i.Password, new { @class = "form-control" })
+    @Html.ValidationMessageFor(i => i.Password)
+
+    @Html.LabelFor(i => i.Mobile)
+    @Html.TextBoxFor(i => i.Mobile, new { @class = "form-control" })
+    @Html.ValidationMessageFor(i => i.Mobile)
+
+    @Html.LabelFor(i => i.Address)
+    @Html.TextBoxFor(i => i.Address, new { @class = "form-control" })
+    @Html.ValidationMessageFor(i => i.Address)
+
+
+    <input type="submit" value="Edit" class="btn btn-primary" />
+}

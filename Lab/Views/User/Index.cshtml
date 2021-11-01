@@ -1,0 +1,20 @@
+﻿@using ViewModels
+@model IEnumerable<UserViewModel>
+
+<title> Table of Users </title>
+
+
+
+<div id="ContainerOfusersList">
+    @Html.Partial("_UsersList", Model)
+</div>
+
+
+
+
+
+
+@section UserInfo
+{
+    <h1> User Info </h1>
+}

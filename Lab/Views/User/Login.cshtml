@@ -1,0 +1,48 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using ViewModels
+@model UserEditViewModel
+
+<title> Login </title>
+<style>
+    .row {
+        margin-top: 50px;
+        padding-top: 100px;
+        padding-left: 300px;
+        background-color: cornflowerblue;
+        height: auto;
+    }
+
+    form {
+        margin-top: 80px;
+        margin-bottom: 80px;
+    }
+</style>
+
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        <div class="mb-3">
+            @Html.LabelFor(i => i.UserName)
+            @Html.TextBoxFor(i => i.UserName)
+
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(i => i.Password)
+            @Html.PasswordFor(i => i.Password)
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    }
+
+    <br />
+    <br />
+    @Html.ValidationSummary()
+</div>
+
+

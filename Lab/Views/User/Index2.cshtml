@@ -1,0 +1,17 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using ViewModels
+@model IEnumerable<UserViewModel>
+@using GridMvc.Html
+
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(i => i.ID).Titled("ID").Sortable(true);
+    columns.Add(i => i.UserName).Sortable(true).Filterable(true);
+    columns.Add(i => i.Mobile).Sortable(true).Filterable(true);
+    columns.Add(i => i.Address).Sortable(true).Filterable(true);
+}).WithPaging(4)
