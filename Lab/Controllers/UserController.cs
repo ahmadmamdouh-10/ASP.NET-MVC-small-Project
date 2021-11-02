@@ -43,22 +43,45 @@ namespace Lab.Controllers
 
         [HttpGet]
         [CheckUserIdentity]
-        public ActionResult Index(string searchBy, string search, int? page)
-        {
+        public ActionResult Index(string searchByName = "",
+                                  string searchByMobile = "",
+                                  string searchByAddress = "",
+                                  int? page =1)
+        { 
             ViewBag.Title = "Index";
-            if(searchBy == "Username")
+            if (searchByName != "" && searchByMobile != "" && searchByAddress != "")
                 return View(GetUsers()
-                    .Where(i=> i.UserName.StartsWith(search) 
-                    || search == null).ToPagedList(page ?? 1,5));
+                    .Where(i => i.UserName.StartsWith(searchByName)
+                    && i.Mobile == searchByMobile
+                    && i.Address == searchByAddress
+                    ).ToPagedList(page ?? 1, 5));
 
-            else if(searchBy == "Mobile")
+            else if (searchByName != "" && searchByMobile != "" && searchByAddress == "")
                 return View(GetUsers()
-                    .Where(i => i.Mobile == search ||
-                    search == null).ToPagedList(page ?? 1, 5));
-            else
+                                    .Where(i => i.UserName.StartsWith(searchByName)
+                                    && i.Mobile == searchByMobile
+                                    ).ToPagedList(page ?? 1, 5));
+
+            else if (searchByName != "" && searchByMobile == "" && searchByAddress != "")
                 return View(GetUsers()
-                    .Where(i => i.Address == search ||
-                    search == null).ToPagedList(page ?? 1, 5));
+                    .Where(i => i.UserName.StartsWith(searchByName)
+                    && i.Address == searchByAddress
+                    ).ToPagedList(page ?? 1, 5));
+
+            else if (searchByName == "" && searchByMobile != "" && searchByAddress != "")
+                return View(GetUsers()
+                    .Where(i => i.Mobile == searchByMobile
+                    && i.Address == searchByAddress
+                    ).ToPagedList(page ?? 1, 5));
+
+            else if(searchByName != "" || searchByMobile != "" || searchByAddress != "")
+                return View(GetUsers()
+                   .Where(i => i.UserName.StartsWith(searchByName)
+                   || i.Mobile == searchByMobile
+                   || i.Address == searchByAddress
+                   ).ToPagedList(page ?? 1, 5));
+            else 
+                return View(GetUsers().ToPagedList(page ?? 1, 5));
         }
 
         [HttpGet]

@@ -30,6 +30,8 @@ namespace ViewModels
             {
                 ID = User.ID,
                 UserName = User.UserName,
+                Address = User.Address,
+                Mobile = User.Mobile,
                 Code = User.Tokens?.FirstOrDefault()?.Code
             };
         }

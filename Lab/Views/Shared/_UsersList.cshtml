@@ -9,18 +9,32 @@
 @using PagedList.Mvc;
 @model PagedList.IPagedList<UserViewModel>
 
+<!-- #region Search by Just One thing -->
+@*<p>
+        @using (Html.BeginForm("Index", "User", FormMethod.Get))
+        {
+            <b> Search By: </b>
+            @Html.RadioButton("SearchBy", "Username", true) <text>Name</text>
+            @Html.RadioButton("SearchBy", "Mobile")<text>Mobile</text>
+            @Html.RadioButton("SearchBy", "Address") <text>Address</text>
+            <br />
+            @Html.TextBox("search") <input type="submit" value="search" />
+        }
+    </p>*@
+
+<!-- #endregion -->
 
 
 
 <p>
     @using (Html.BeginForm("Index", "User", FormMethod.Get))
     {
-        <b> Search By: </b>
-        @Html.RadioButton("SearchBy", "Username", true) <text>Name</text>
-        @Html.RadioButton("SearchBy", "Mobile")<text>Mobile</text>
-        @Html.RadioButton("SearchBy", "Address") <text>Address</text>
-        <br />
-        @Html.TextBox("search") <input type="submit" value="search" />
+        <b> Search By: </b><br /> <br />
+        <text>Name: </text> @Html.TextBox("searchByName")
+        <text>Mobile: </text> @Html.TextBox("searchByMobile")
+        <text>Address: </text>@Html.TextBox("searchByAddress")
+        <input type="submit" value="search" /> <br />
+
     }
 </p>
 
